@@ -48,7 +48,10 @@ const ModalButton = ({
   return (
     <TouchableHighlight
       underlayColor="#F1F2F2"
-      onPress={onPress}
+      onPress={() => {
+          console.log('modalbutton press');
+          onPress();
+      }}
       disabled={disabled}
       activeOpacity={activeOpacity}
       style={[styles.button, buttonAlign, border, style]}

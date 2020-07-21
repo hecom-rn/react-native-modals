@@ -29,12 +29,12 @@
   "license": "MIT",
   "homepage": "https://github.com/jacklam718/react-native-modals/blob/master/README.md",
   "dependencies": {
-    "babel-plugin-flow-react-proptypes": "^9.1.1",
-    "prop-types": "^15.6.0",
-    "react-native-root-siblings": "^3.2.2"
   },
   "peerDependencies": {
-    "react-native": ">=0.50.0"
+    "react-native-root-siblings": ">=4.0.0",
+    "babel-plugin-flow-react-proptypes": "*",
+    "prop-types": "*",
+    "react-native": ">=0.62.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -55,8 +55,9 @@
     "jest-enzyme": "^7.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-native": "^0.50.4",
+    "react-native": "^0.63.0",
     "react-native-mock-render": "^0.0.26",
+    "react-native-root-siblings": "^4.0.0",
     "rimraf": "^2.6.2"
   },
   "jest": {
