@@ -1,21 +1,21 @@
 // @flow
 
-import React, { Fragment, Component } from 'react';
+import { Component, Fragment } from 'react';
 import {
-  View,
-  StyleSheet,
   Animated,
   Dimensions,
   BackAndroid as RNBackAndroid,
   BackHandler as RNBackHandler,
+  StyleSheet,
+  View,
 } from 'react-native';
 
-import DraggableView from './DraggableView';
-import ModalContext from './ModalContext';
-import Backdrop from './Backdrop';
-import type { ModalProps } from '../type';
 import Animation from '../animations/Animation';
 import FadeAnimation from '../animations/FadeAnimation';
+import type { ModalProps } from '../type';
+import Backdrop from './Backdrop';
+import DraggableView from './DraggableView';
+import ModalContext from './ModalContext';
 
 const BackHandler = RNBackHandler || RNBackAndroid;
 
@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
 });
 
 type ModalState =
- | typeof MODAL_OPENING
- | typeof MODAL_OPENED
- | typeof MODAL_CLOSING
- | typeof MODAL_CLOSED
+  | typeof MODAL_OPENING
+  | typeof MODAL_OPENED
+  | typeof MODAL_CLOSING
+  | typeof MODAL_CLOSED
 
 type State = {
   modalAnimation: Animation;
@@ -78,19 +78,19 @@ class BaseModal extends Component<ModalProps, State> {
     modalStyle: null,
     width: null,
     height: null,
-    onTouchOutside: () => {},
+    onTouchOutside: () => { },
     onHardwareBackPress: () => false,
     hasOverlay: true,
     overlayOpacity: 0.5,
     overlayPointerEvents: null,
     overlayBackgroundColor: '#000',
-    onShow: () => {},
-    onDismiss: () => {},
+    onShow: () => { },
+    onDismiss: () => { },
     footer: null,
-    onMove: () => {},
-    onSwiping: () => {},
-    onSwipeRelease: () => {},
-    onSwipingOut: () => {},
+    onMove: () => { },
+    onSwiping: () => { },
+    onSwipeRelease: () => { },
+    onSwipingOut: () => { },
     useNativeDriver: true,
   }
 
@@ -109,7 +109,7 @@ class BaseModal extends Component<ModalProps, State> {
     if (this.props.visible) {
       this.show();
     }
-    BackHandler.addEventListener(HARDWARE_BACK_PRESS_EVENT, this.onHardwareBackPress);
+    this.backHandlerSubscription = BackHandler.addEventListener(HARDWARE_BACK_PRESS_EVENT, this.onHardwareBackPress);
   }
 
   componentDidUpdate(prevProps: ModalProps) {
@@ -123,7 +123,9 @@ class BaseModal extends Component<ModalProps, State> {
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener(HARDWARE_BACK_PRESS_EVENT, this.onHardwareBackPress);
+    if (this.backHandlerSubscription && this.backHandlerSubscription.remove) {
+      this.backHandlerSubscription.remove();
+    }
   }
 
   onHardwareBackPress = (): boolean => this.props.onHardwareBackPress();
